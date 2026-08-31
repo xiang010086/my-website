@@ -6,6 +6,12 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   build: {
     sourcemap: 'hidden',
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        h5: 'h5.html',
+      },
+    },
   },
   plugins: [
     react({

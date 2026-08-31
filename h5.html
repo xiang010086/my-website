@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#FDF3E0" />
+    <meta
+      name="description"
+      content="王思翔 · 创业者 / FDE / AI 应用工程师。连接 AI 的人、方案与可能性，让想法真正落地。"
+    />
+    <title>王思翔 · 让想法真正落地</title>
+    <script>
+      // 电脑（宽屏+鼠标）访问 H5 → 自动回桌面版；想留在 H5 加 ?keep=1
+      (function () {
+        if (location.search.indexOf("keep=1") > -1) return;
+        var isDesktop =
+          window.matchMedia("(min-width: 769px)").matches &&
+          window.matchMedia("(pointer: fine)").matches;
+        if (isDesktop) {
+          location.replace("./" + location.search + location.hash);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/h5/main.tsx"></script>
+  </body>
+</html>

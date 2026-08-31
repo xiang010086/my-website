@@ -2,13 +2,206 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  line-height: 1.5;
-  font-weight: 400;
+html {
+  scroll-behavior: smooth;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  @apply bg-cream text-ink font-sans antialiased;
+  min-width: 320px;
+  /* 纸感底纹：细密圆点 */
+  background-image: radial-gradient(rgba(38, 32, 26, 0.055) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #26201a;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: 0.75rem;
+  background: #26201a;
+  color: #fffbf2;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(38, 32, 26, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 32, 26, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.35) 72%, transparent 100%);
+}
+
+@layer components {
+  .magnetic-button {
+    @apply inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-black shadow-[0_10px_24px_rgba(38,32,26,0.10)] transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1;
+  }
+
+  .contact-rail {
+    @apply flex min-h-[4.5rem] w-full items-center justify-between gap-4 rounded-2xl border border-paper/10 bg-paper/[0.045] px-4 py-3.5 text-left transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-paper/25 hover:bg-paper/[0.075] md:px-5;
+  }
+}
+
+/* 整页覆盖层用的同款纸感底 */
+.paper-bg {
+  background-color: #fdf3e0;
+  background-image: radial-gradient(rgba(38, 32, 26, 0.055) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+::selection {
+  background: #ffb930;
+  color: #26201a;
+}
+
+/* 黄色荧光笔划线效果 */
+.marker {
+  background-image: linear-gradient(transparent 62%, rgba(255, 185, 48, 0.85) 62%);
+  background-repeat: no-repeat;
+}
+
+/* 起卦加载屏：铜钱翻落 */
+@keyframes coin-toss {
+  0% {
+    transform: translateY(34px) rotateX(0deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(-30px) rotateX(340deg);
+  }
+  100% {
+    transform: translateY(0) rotateX(720deg);
+    opacity: 1;
+  }
+}
+.preloader-coin {
+  animation: coin-toss 0.95s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+}
+
+/* 龟壳待机的轻微呼吸浮动 */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.bob {
+  animation: bob 2.8s ease-in-out infinite;
+}
+
+/* 太阳光芒缓慢旋转 */
+@keyframes sun-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.sun-rays {
+  transform-origin: 100px 100px;
+  animation: sun-spin 80s linear infinite;
+}
+
+/* 铜钱样式：外圆内方 */
+.coin {
+  position: relative;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 32% 28%, #ffd977, #f0b13c 55%, #cf8f22);
+  border: 3px solid #26201a;
+  box-shadow: 0 4px 0 rgba(38, 32, 26, 0.25);
+}
+.coin-hole {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 34%;
+  height: 34%;
+  background: #fdf3e0;
+  border: 2.5px solid #8c6320;
+  border-radius: 3px;
+}
+.coin-char {
+  position: absolute;
+  font-family: theme("fontFamily.kai");
+  font-weight: 700;
+  color: #7a4e1f;
+  user-select: none;
+}
+
+/* 大吉印章：朱砂红 + 楷体 + 斑驳感 */
+.seal {
+  font-family: theme("fontFamily.kai");
+  background: radial-gradient(circle at 30% 25%, #e8452c, #ce2b18 60%, #b02212);
+  color: #fff8ec;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 248, 236, 0.55),
+    inset 0 0 22px rgba(0, 0, 0, 0.22),
+    4px 6px 0 rgba(38, 32, 26, 0.18);
+}
+
+/* 拍立得照片胶带 */
+.tape {
+  position: absolute;
+  width: 84px;
+  height: 26px;
+  background: rgba(255, 214, 102, 0.75);
+  border-left: 2px dashed rgba(38, 32, 26, 0.15);
+  border-right: 2px dashed rgba(38, 32, 26, 0.15);
+  transform: rotate(-4deg);
+}
+
+/* 隐藏滚动条但保留滚动（横向照片墙备用） */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
