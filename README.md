@@ -1,57 +1,93 @@
-# React + TypeScript + Vite
+# 王思翔个人网站
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+这是王思翔（啊翔）的个人作品集网站，用来介绍我的经历、AI 项目交付、黑客松获奖和社区活动。
 
-Currently, two official plugins are available:
+我是一名创业者、FDE / AI 应用工程师，也是杭州爻联网络科技有限责任公司的主理人。相比展示概念，这个网站更关注一件事：如何把想法真正做成可以运行、验证和持续迭代的产品。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 在线访问
 
-## Expanding the ESLint configuration
+- [电脑端主页](https://opal-kappa-62.vercel.app/)
+- [手机端 H5](https://opal-kappa-62.vercel.app/h5)
+- [GitHub 仓库](https://github.com/xiang010086/my-website)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 网站里有什么
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- 个人定位、经历和能力介绍
+- 已经真实上线的 AI 项目案例
+- 黑客松获奖项目与现场素材
+- 杭州 AI 社区活动记录
+- 微信、抖音和小红书二维码联系入口
+- 滚动揭示、卡片展开、彩色气泡和起卦彩蛋等互动效果
+- 独立适配的电脑端页面与手机端 H5 页面
+
+## 技术栈
+
+- React 18 + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- qrcode.react
+- Vercel
+
+## 本地运行
+
+需要先安装 Node.js 18 或更高版本。
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+启动后可以访问：
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- 电脑端：`http://localhost:5173/`
+- 手机端 H5：`http://localhost:5173/h5.html`
 
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 检查与构建
+
+```bash
+# 代码检查
+npm run lint
+
+# TypeScript 检查和生产构建
+npm run build
+
+# 本地预览构建结果
+npm run preview
 ```
+
+生产文件会生成在 `dist/` 目录中。
+
+## 项目结构
+
+```text
+public/                 图片、视频和二维码等静态素材
+src/components/         电脑端与共用页面组件
+src/data/content.ts     网站主要文案和项目数据
+src/h5/                 手机端 H5 入口与布局
+src/App.tsx             电脑端页面入口
+index.html              电脑端 HTML 入口
+h5.html                 H5 HTML 入口
+vercel.json             Vercel 构建与路由配置
+```
+
+## 修改网站内容
+
+- 修改个人介绍、项目文案或联系方式：编辑 `src/data/content.ts`
+- 更换头像、二维码、项目图片或视频：替换 `public/` 中对应文件
+- 修改电脑端页面结构：从 `src/App.tsx` 和 `src/components/` 开始
+- 修改手机端页面：从 `src/h5/H5App.tsx` 开始
+
+替换静态资源时尽量保持原文件名，可以减少额外的代码修改。
+
+## 部署方式
+
+网站使用 Vercel 部署，并连接此 GitHub 仓库的 `main` 分支。提交并推送到 `main` 后，Vercel 会自动构建和发布新版本。
+
+```bash
+git add .
+git commit -m "Update website"
+git push origin main
+```
+
+部署前建议先运行 `npm run lint` 和 `npm run build`。
