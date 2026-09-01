@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { createContext, useContext, useRef, type ReactNode } from "react";
 import {
   motion,
   useInView,
@@ -7,18 +7,32 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import type { ReactNode } from "react";
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
 
+const RevealImmediatelyContext = createContext(false);
+
 /**
- * 进视口揭示标记：IntersectionObserver 触发 + 1.2s 超时兜底。
- * 弹层、被 transform 的祖先等场景下 IO 偶发不回调，兜底保证内容永不卡在隐藏态。
+ * 用于已经由父级负责入场的弹层。弹层从屏幕外进入时，内部元素不再依赖
+ * IntersectionObserver，避免内容永久停留在隐藏初始态。
+ */
+export function RevealImmediately({ children }: { children: ReactNode }) {
+  return (
+    <RevealImmediatelyContext.Provider value={true}>
+      {children}
+    </RevealImmediatelyContext.Provider>
+  );
+}
+
+/**
+ * 进视口揭示标记。普通页面由 IntersectionObserver 触发；已经由父级负责
+ * 入场的弹层通过 RevealImmediately 直接显示，避免 transform 影响观察结果。
  */
 function useReveal(amount = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount });
-  return { ref, shown: inView };
+  const revealImmediately = useContext(RevealImmediatelyContext);
+  return { ref, shown: revealImmediately || inView };
 }
 
 /** 逐字遮罩揭示：字符一个个从遮罩里升起（首屏大标题用，对标参考站逐字母入场） */

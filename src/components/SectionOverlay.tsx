@@ -1,6 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { motion } from "framer-motion";
-import { EASE } from "./motion";
+import { EASE, RevealImmediately } from "./motion";
 import { useModalFocus } from "../lib/modal";
 
 /**
@@ -68,7 +68,7 @@ export default function SectionOverlay({
           transition={{ duration: 0.6, delay: 0.18, ease: EASE }}
           className="mx-auto max-w-6xl px-5 py-12 md:py-16"
         >
-          {children}
+          <RevealImmediately>{children}</RevealImmediately>
         </motion.div>
       </div>
     </motion.div>

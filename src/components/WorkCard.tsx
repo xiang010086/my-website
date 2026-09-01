@@ -87,7 +87,12 @@ export default function WorkCard({ work }: { work: Work }) {
         </FadeUp>
         <h3 className="mt-4 text-[1.45rem] font-black tracking-tight">{work.title}</h3>
         <p className="mt-3 flex-1 text-[15px] leading-relaxed text-ink/70">{work.desc}</p>
-        <div className="mt-5 flex flex-wrap items-center gap-2">
+        <div className="mt-5 flex items-center justify-between gap-4 border-t border-ink/10 pt-5">
+          <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-ink/50">我的角色</span>
+          <strong className="text-right text-sm font-black text-ink/80">{work.role}</strong>
+        </div>
+        <p className="mt-5 font-mono text-[10px] font-bold tracking-[0.18em] text-ink/50">使用工具 / 技术</p>
+        <div className="mt-2 flex flex-wrap items-center gap-2">
           {work.tech.map((t) => (
             <span key={t} className="rounded-full bg-cream px-3 py-1 text-xs font-medium text-ink/70">
               {t}
